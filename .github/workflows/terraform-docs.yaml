@@ -71,4 +71,14 @@ jobs:
         with:
           working-dir: .
           git-push: true
-          config-file: .terraform-docs-example.yaml
+          output-file: README.md
+          output-format: markdown table
+          output-method: replace
+          recursive: true
+          recursive-path: examples
+          template: |
+            <!-- BEGIN_TF_DOCS -->
+            {{ .Content }}
+            <!-- END_TF_DOCS -->
+            {{- printf "\n" -}}
+          args: "--header-from .header.md"
