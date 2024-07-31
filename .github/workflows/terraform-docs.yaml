@@ -1,14 +1,7 @@
 name: Terraform Docs
 
 on:
-  push:
-    branches:
-      - main
-      - master
-  pull_request:
-    branches:
-      - main
-      - master
+  workflow_call:
 
 env:
   TERRAFORM_DOCS_VERSION: v0.18.0
@@ -20,7 +13,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.pull_request.head.ref }}
+          ref: ${{ github.ref }}
 
       - name: Render and Push terraform docs for main module
         uses: terraform-docs/gh-actions@main
@@ -82,3 +75,18 @@ jobs:
             <!-- END_TF_DOCS -->
             {{- printf "\n" -}}
           args: "--header-from .header.md"
+
+
+      - name: Get latest commit hash
+        id: get_latest_commit
+        run: echo "::set-output name=commit::$(git rev-parse HEAD)"
+
+  release:
+    name: Module Release
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    needs: generateDocs
+    uses: ./release.yaml@main
+    with:
+      ref: ${{ needs.generateDocs.outputs.latest_commit }}
+    secrets:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,19 @@
+name: Terraform Master Workflow
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+    branches:
+      - main
+      - master
+jobs:
+  preCommitCheck:
+    name: Terraform Checks
+    uses: ./terraform-checks.yaml@main
+
+  generateDocs:
+    name: Generate Terraform Docs
+    uses: ./terraform-docs.yaml@main

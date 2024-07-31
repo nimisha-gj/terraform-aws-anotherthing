@@ -1,9 +1,12 @@
 name: 'Module Release'
 
 on:
-  push:
-    branches:
-      - main
+  workflow_call:
+    inputs:
+      ref:
+        description: 'The git ref to checkout'
+        required: true
+        type: string
 
 defaults:
   run:
@@ -17,8 +20,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          persist-credentials: false
-          fetch-depth: 0
+          ref: ${{ inputs.ref}}
 
       - name: Release
         uses: cycjimmy/semantic-release-action@v2
