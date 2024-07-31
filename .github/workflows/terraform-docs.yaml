@@ -22,7 +22,12 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.ref }}
 
-      - name: Render and Push terraform docs for main and modules
+      - name: Check if modules folder exists
+        id: check_modules
+        run: echo "modules_exists=$(if [ -d modules ]; then echo true; else echo false; fi)" >> $GITHUB_ENV
+
+      - name: Render and Push terraform docs for modules
+        if: env.modules_exists == 'true'
         uses: terraform-docs/gh-actions@main
         with:
           working-dir: .
