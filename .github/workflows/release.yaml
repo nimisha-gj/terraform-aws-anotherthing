@@ -2,11 +2,6 @@ name: 'Module Release'
 
 on:
   workflow_call:
-    inputs:
-      ref:
-        description: 'The git ref to checkout'
-        required: true
-        type: string
 
 defaults:
   run:
