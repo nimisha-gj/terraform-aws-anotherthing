@@ -79,12 +79,10 @@ jobs:
 
       - name: Get latest commit hash
         id: get_latest_commit
-        run: echo "::set-output name=commit::$(git rev-parse HEAD)"
+        run: echo "LATEST_COMMIT=$(git rev-parse HEAD)" >> $GITHUB_ENV
 
-  release:
-    name: Module Release
-    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-    needs: generateDocs
-    uses: ./.github/workflows/release.yaml
-    with:
-      ref: ${{ needs.generateDocs.outputs.latest_commit }}
+      - name: Module Release
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        uses: ./.github/workflows/release.yaml
+        with:
+          ref: ${{ env.LATEST_COMMIT }}
