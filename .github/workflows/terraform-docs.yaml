@@ -85,7 +85,7 @@ jobs:
     name: Module Release
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     needs: generateDocs
-    uses: ./.github/workflows/release.yaml@main
+    uses: ./.github/workflows/release.yaml
     with:
       ref: ${{ needs.generateDocs.outputs.latest_commit }}
     secrets:

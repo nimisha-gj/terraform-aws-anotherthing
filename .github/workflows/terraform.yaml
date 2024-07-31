@@ -12,8 +12,8 @@ on:
 jobs:
   preCommitCheck:
     name: Terraform Checks
-    uses: ./.github/workflows/terraform-checks.yaml@main
+    uses: ./.github/workflows/terraform-checks.yaml
 
   generateDocs:
     name: Generate Terraform Docs
-    uses: ./.github/workflows/terraform-docs.yaml@main
+    uses: ./.github/workflows/terraform-docs.yaml
