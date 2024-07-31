@@ -18,3 +18,9 @@ jobs:
     name: Generate Terraform Docs
     needs: preCommitCheck
     uses: ./.github/workflows/terraform-docs.yaml
+
+  release:
+    name: Release module
+    needs: generateDocs
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    uses: ./.github/workflows/release.yaml

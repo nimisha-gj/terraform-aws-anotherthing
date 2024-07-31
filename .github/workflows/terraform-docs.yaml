@@ -75,14 +75,3 @@ jobs:
             <!-- END_TF_DOCS -->
             {{- printf "\n" -}}
           args: "--header-from .header.md"
-
-
-      - name: Get latest commit hash
-        id: get_latest_commit
-        run: echo "LATEST_COMMIT=$(git rev-parse HEAD)" >> $GITHUB_ENV
-
-      - name: Module Release
-        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-        uses: ./.github/workflows/release.yaml
-        with:
-          ref: ${{ env.LATEST_COMMIT }}
