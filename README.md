@@ -1,5 +1,6 @@
 <!-- BEGIN_TF_DOCS -->
 Main pakka
+idli pakka
 
 ## Requirements
 
