@@ -26,4 +26,5 @@ jobs:
 
   generateDocs:
     name: Generate Terraform Docs
+    needs: preCommitCheck
     uses: ./.github/workflows/terraform-docs.yaml
