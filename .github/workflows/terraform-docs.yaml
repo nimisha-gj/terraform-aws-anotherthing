@@ -88,5 +88,3 @@ jobs:
     uses: ./.github/workflows/release.yaml
     with:
       ref: ${{ needs.generateDocs.outputs.latest_commit }}
-    secrets:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
