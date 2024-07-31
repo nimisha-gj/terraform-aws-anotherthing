@@ -10,16 +10,6 @@ on:
       - main
       - master
 jobs:
-  some:
-    runs-on: ubuntu-latest
-    steps:
-    - name: print ls
-      run: ls
-    - name: print pwd
-      run: pwd
-    - name: print la
-      run: ls -la
-
   preCommitCheck:
     name: Terraform Checks
     uses: ./.github/workflows/terraform-checks.yaml
